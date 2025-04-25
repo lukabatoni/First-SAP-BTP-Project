@@ -1,0 +1,29 @@
+---
+applications:
+  - name: helloworld
+    random-route: true
+    path: ./target/java-tutorial-0.0.1-SNAPSHOT.jar
+    memory: 1024M
+    buildpacks:
+      - sap_java_buildpack_jakarta
+    env:
+      TARGET_RUNTIME: tomcat
+      JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jdk.SAPMachineJDK']"
+      JBP_CONFIG_SAP_MACHINE_JDK : "{ version: 21.+ }"
+    services:
+      - javauaa
+  - name: web
+    random-route: true
+    path: web
+    memory: 1024M
+    env:
+      destinations: >
+        [
+          {
+            "name":"helloworld",
+            "url":"https://helloworld-bold-porcupine-bx.cfapps.us10-001.hana.ondemand.com/",
+            "forwardAuthToken": true
+          }
+        ]
+    services:
+      - javauaa

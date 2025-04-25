@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "source": "^/helloworld/(.*)$",
+      "target": "$1",
+      "destination": "helloworld"
+    }
+  ]
+}
