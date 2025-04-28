@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<sap-cf-version>3.5.0</sap-cf-version>
 	</properties>
 	<dependencies>
 		<!-- Spring Boot starter packages -->
@@ -47,11 +48,18 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.sap.hcp.cf.logging</groupId>
+			<artifactId>cf-java-logging-support-logback</artifactId>
+			<version>${sap-cf-version}</version>  <!-- check for the latest on Maven Central -->
+		</dependency>
+
+
 		<!-- Spring and XSUAA Security -->
 		<dependency>
 			<groupId>com.sap.cloud.security.xsuaa</groupId>
 			<artifactId>xsuaa-spring-boot-starter</artifactId>
-			<version>3.5.0</version>
+			<version>${sap-cf-version}</version>
 		</dependency>
 
 		<!-- dependencies for test -->
