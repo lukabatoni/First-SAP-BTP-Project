@@ -12,6 +12,7 @@ applications:
       JBP_CONFIG_SAP_MACHINE_JDK : "{ version: 21.+ }"
     services:
       - javauaa
+      - my-app-logging
   - name: web
     random-route: true
     path: web
