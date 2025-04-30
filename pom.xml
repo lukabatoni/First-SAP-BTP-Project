@@ -30,6 +30,8 @@
 		<java.version>21</java.version>
 		<sap-cf-version>3.5.0</sap-cf-version>
 	</properties>
+
+
 	<dependencies>
 		<!-- Spring Boot starter packages -->
 		<dependency>
@@ -62,8 +64,21 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
 
+		<dependency>
+			<groupId>com.sap.cloud.sdk.cloudplatform</groupId>
+			<artifactId>cloudplatform-connectivity</artifactId>
+			<version>5.18.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cloud.sdk.cloudplatform</groupId>
+			<artifactId>cloudplatform-connectivity-scp-cf</artifactId>
+			<version>5.18.0</version>
+		</dependency>
+
+
+	</dependencies>
 
 	<build>
 		<plugins>

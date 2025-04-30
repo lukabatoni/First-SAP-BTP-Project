@@ -13,6 +13,7 @@ applications:
     services:
       - javauaa
       - my-app-logging
+      - dest-service
   - name: web
     random-route: true
     path: web
