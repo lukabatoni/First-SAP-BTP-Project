@@ -29,6 +29,8 @@
 	<properties>
 		<java.version>21</java.version>
 		<sap-cf-version>3.5.0</sap-cf-version>
+		<cloud-sdk>5.18.0</cloud-sdk>
+		<odata-version>5.0.0</odata-version>
 	</properties>
 
 
@@ -58,7 +60,6 @@
 			<version>${sap-cf-version}</version>
 		</dependency>
 
-		<!-- dependencies for test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -68,13 +69,55 @@
 		<dependency>
 			<groupId>com.sap.cloud.sdk.cloudplatform</groupId>
 			<artifactId>cloudplatform-connectivity</artifactId>
-			<version>5.18.0</version>
+			<version>${cloud-sdk}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.sap.cloud.sdk.cloudplatform</groupId>
 			<artifactId>cloudplatform-connectivity-scp-cf</artifactId>
-			<version>5.18.0</version>
+			<version>${cloud-sdk}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cloud.sdk.datamodel</groupId>
+			<artifactId>odata-v4-core</artifactId>
+			<version>${cloud-sdk}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cloud.sdk.datamodel</groupId>
+			<artifactId>odata-v4-generator</artifactId>
+			<version>${cloud-sdk}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.olingo</groupId>
+			<artifactId>odata-commons-api</artifactId>
+			<version>${odata-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.olingo</groupId>
+			<artifactId>odata-commons-core</artifactId>
+			<version>${odata-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.olingo</groupId>
+			<artifactId>odata-server-api</artifactId>
+			<version>${odata-version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.olingo</groupId>
+			<artifactId>odata-server-core</artifactId>
+			<version>${odata-version}</version>
+			<scope>runtime</scope>
 		</dependency>
 
 
@@ -86,7 +129,32 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.sap.cloud.sdk.datamodel</groupId>
+				<artifactId>odata-v4-generator-maven-plugin</artifactId>
+				<version>${cloud-sdk}</version>
+				<executions>
+					<execution>
+						<id>generate-northwind-client</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputDirectory>${project.basedir}/src/main/resources/edmx</inputDirectory>
+							<outputDirectory>${project.build.directory}/generated-sources/northwind</outputDirectory>
+							<packageName>com.mycompany.northwind</packageName>
+							<defaultBasePath>/V4/Northwind/Northwind.svc/</defaultBasePath>
+							<compileScope>COMPILE</compileScope>
+							<deleteOutputDirectory>true</deleteOutputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
+
 	</build>
+
 
 </project>
