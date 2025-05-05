@@ -1,4 +1,4 @@
-package com.example.java_tutorial;
+package com.example.java_tutorial.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.example.java_tutorial;
+package com.example.java_tutorial.controllers;
 
 import com.example.java_tutorial.services.NorthwindOlingoService;
 import com.example.java_tutorial.services.SecondAppService;

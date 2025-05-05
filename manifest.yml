@@ -7,6 +7,7 @@ applications:
     buildpacks:
       - sap_java_buildpack_jakarta
     env:
+      NORTHWIND_SERVICE_PATH: "/V4/Northwind/Northwind.svc/"
       TARGET_RUNTIME: tomcat
       JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jdk.SAPMachineJDK']"
       JBP_CONFIG_SAP_MACHINE_JDK : "{ version: 21.+ }"

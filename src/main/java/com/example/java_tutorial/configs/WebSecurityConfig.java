@@ -1,4 +1,4 @@
-package com.example.java_tutorial;
+package com.example.java_tutorial.configs;
 
 import com.sap.cloud.security.xsuaa.XsuaaServiceConfiguration;
 import com.sap.cloud.security.xsuaa.token.TokenAuthenticationConverter;
