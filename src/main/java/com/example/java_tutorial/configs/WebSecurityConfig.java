@@ -32,7 +32,7 @@ public class WebSecurityConfig {
         // demand specific scopes depending on intended request
         .authorizeRequests()
 
-        .requestMatchers("/**").permitAll()
+        .requestMatchers("/**").authenticated()
         .anyRequest().denyAll() // deny anything not configured above
         .and()
         .oauth2ResourceServer().jwt()

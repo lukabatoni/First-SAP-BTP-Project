@@ -9,6 +9,7 @@ import org.apache.olingo.client.api.ODataClient;
 import org.apache.olingo.client.api.communication.request.retrieve.ODataEntitySetRequest;
 import org.apache.olingo.client.api.domain.ClientEntitySet;
 import org.apache.olingo.client.core.ODataClientFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
@@ -16,6 +17,9 @@ import org.springframework.util.MultiValueMap;
 public class NorthwindOlingoService {
   private static final String DEST = "Northwind";
   private final ODataClient client = ODataClientFactory.getClient();
+
+  @Value("${northwind.service.path}")
+  private String northwindPath;
 
   public List<Map<String, Object>> fetchEntitySet(
       String entitySet,
@@ -26,7 +30,7 @@ public class NorthwindOlingoService {
         .asHttp();
 
     String root = dest.getUri().toString().replaceAll("/$", "")
-        + "/V4/Northwind/Northwind.svc/";
+        + northwindPath;
 
     var builder = client.newURIBuilder(root)
         .appendEntitySetSegment(entitySet);
