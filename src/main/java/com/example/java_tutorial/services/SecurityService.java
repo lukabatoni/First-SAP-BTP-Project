@@ -1,26 +1,32 @@
 package com.example.java_tutorial.services;
 
-import com.example.java_tutorial.NotAuthorizedException;
+import com.example.java_tutorial.exceptions.NotAuthorizedException;
 import com.sap.cloud.security.xsuaa.token.Token;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SecurityService {
-  private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
+  private static final String NULL_TOKEN_MESSAGE = "Token can not be null";
+  private static final String MISSING_SCOPE_TEMPLATE = "Missing required scope for token: %s";
 
-  public Optional<Boolean> validateAccess(Token token) throws NotAuthorizedException {
-    logger.info("Validating access for token");
-    if (!token.getAuthorities().contains(new SimpleGrantedAuthority("Display"))) {
-      logger.warn("Access denied – missing 'Display' scope for token {}", token.getAppToken());
-      return Optional.empty();
+  public void validateAccess(Token token) throws NotAuthorizedException {
+    log.info("Validating access for token");
+    if (token == null) {
+      throw new NotAuthorizedException(NULL_TOKEN_MESSAGE);
     }
-    logger.debug("User authorized");
-    return Optional.of(true);
+    if (!token.getAuthorities().contains(new SimpleGrantedAuthority("Display"))) {
+      String message = String.format(
+          MISSING_SCOPE_TEMPLATE,
+          token.getAppToken()
+      );
+      log.warn(message);
+      throw new NotAuthorizedException(message);
+    }
+    log.debug("User authorized");
   }
 }
